@@ -1,3 +1,4 @@
+const e = require('express')
 const express = require('express')
 
 // Instead of the app accessing these routes directly, we will use a router thats called in the main app.
@@ -13,15 +14,37 @@ router.get('/', (req, res) => {
 
 router.get('/new', (req, res) => {
 
-  res.send("New User Form")
+  res.render("users/new")
 
 })
+
+
+/**
+ * ! Remember '.post' creates requests or responses for the router to send to the application.
+ * * This post function will push the firstName acquired by the new.ejs page into the 'users' stack created below, then it will
+ * * redirect the user to the /users/(userCreatedID) page to display information.
+ * ? [Else] it will log an "Error" message to the user and re-render the entered name to the user. 
+ */
+
 
 router.post('/', (req, res) => {
 
-  res.send("Created a new User")
+  const isValid = true
+
+  if(isValid)
+  {
+    users.push({ firstName: req.body.firstName})
+    res.redirect(`/users/${users.length - 1}`)
+  }
+  else
+  {
+    console.log("Error")
+    res.render('users/new', { firstName: req.body.firstName})
+  }
 
 })
+
+// * ============================================================================================================================== End of Block
 
 
 // /*
@@ -76,6 +99,7 @@ router
 
 
 
+// The array that holds users pushed to them by a 'post' request and has two predefined user names 
 const users = [{ name: "Danny"}, { name: "Jacob"}]
 
 

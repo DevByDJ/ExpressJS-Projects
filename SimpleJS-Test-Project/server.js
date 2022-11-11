@@ -6,6 +6,8 @@ const app = express()
 //! To be able to view html, css, js related items you need to 'set' the view engine to ejs
 app.set('view engine', 'ejs')
 
+app.use(express.urlencoded({ extended: true}))
+
 // Telling your app that you will be using the function you created down below named 'logger'
 app.use(logger)
 
@@ -33,7 +35,7 @@ app.use('/users', userRouter)
  */
 
  function logger(req, res, next) {
-  console.log(req.originalUrl)
+  console.log("The current URL path is: " + req.originalUrl)
   next()
 }
 

@@ -86,7 +86,7 @@ router
   .route('/:id')
   .get((req, res) => {
     console.log(req.user)
-    res.send('Get user with ID ' + req.params.id)
+    res.send('Get user with ID ' + req.params.id + ' The name is: ' + req.user.name)
   })
   .put((req, res) => {
     res.send('Update user with ID ' + req.params.id)
